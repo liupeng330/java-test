@@ -1,19 +1,44 @@
 package pengliu.cf;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 
 /**
  * Created by peng on 7/18/16.
  */
-public class MyLinkedList<T>
-{
-    private static class Node<U>
+public class MyLinkedList<T> implements Iterable<T> {
+
+    // 为了linkedlist支持for each,需要时间iterator接口
+    @Override
+    public Iterator<T> iterator()
     {
+        return new LinkedListIterator<T>();
+    }
+
+    // 使用私有内部类,隐藏迭代器的实现
+    private class LinkedListIterator<E> implements Iterator<E>
+    {
+        @Override
+        public boolean hasNext()
+        {
+            return current != null;
+        }
+
+        @Override
+        public E next()
+        {
+            Node returned = current;
+            current = current.next;
+            return (E)returned.getValue();
+        }
+    }
+
+
+    private static class Node<U> {
         private Node<U> next;
         private U value;
 
-        public Node(Node<U> next, U value)
-        {
+        public Node(Node<U> next, U value) {
             this.setNext(next);
             this.setValue(value);
         }
@@ -37,10 +62,15 @@ public class MyLinkedList<T>
 
     private Node<T> head;
     private Node<T> tail;
+    private Node<T> current;
 
-    public boolean isEmpty()
-    {
+    public boolean isEmpty() {
         return this.head == null && this.tail == null;
+    }
+
+    public void reset()
+    {
+        this.current = this.head;
     }
 
     public int size()
@@ -65,6 +95,7 @@ public class MyLinkedList<T>
         {
             this.head = newNode;
             this.tail = newNode;
+            this.current = this.head;
         }
         else
         {
@@ -143,10 +174,19 @@ public class MyLinkedList<T>
         linkedList.add(1);
         linkedList.add(2);
         linkedList.add(3);
+        linkedList.add(4);
+        linkedList.add(5);
 
-        linkedList.printAll();
-        linkedList.remove(1);
-        linkedList.printAll();
-        System.out.println(linkedList.size());
+        System.out.println("Start to for each");
+        for(Integer i: linkedList)
+        {
+            System.out.println(i);
+        }
+        linkedList.reset();
+        System.out.println("Start to for each");
+        for(Integer i: linkedList)
+        {
+            System.out.println(i);
+        }
     }
 }
