@@ -1,7 +1,9 @@
 package pengliu.cf;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by peng on 7/18/16.
@@ -188,5 +190,30 @@ public class MyLinkedList<T> implements Iterable<T> {
         {
             System.out.println(i);
         }
+
+        List<Integer> test = new ArrayList<>();
+        test.add(1);
+        test.add(2);
+        test.add(3);
+        test.add(4);
+
+
+        System.out.println(test.get(2));
+        int[] a = new int[5];
+        for(int i = 0; i < a.length; i++)
+        {
+            System.out.println(a[i]);
+        }
+
+        int[] b = {2, 1, 4};
+        System.out.println(b);
+        testArray(b);
+
+    }
+
+    private static void testArray(int[] arr)
+    {
+        System.out.println(arr);
+        System.out.println(arr.length);
     }
 }
