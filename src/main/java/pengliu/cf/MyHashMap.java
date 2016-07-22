@@ -49,7 +49,6 @@ public class MyHashMap<K, V> {
         }
     }
 
-
     private int size;
     private List<LinkedList<EntrySet<K, V>>> innerList;
 
@@ -105,6 +104,24 @@ public class MyHashMap<K, V> {
         {
             this.getIndex(key).remove(result);
         }
+    }
+
+    public static void main(String[] args)
+    {
+        MyHashMap<String, String> myMap = new MyHashMap<>(5);
+        myMap.add("test1", "hahah1");
+        myMap.add("test2", "hahah2");
+        myMap.add("test3", "hahah3");
+        myMap.add("test4", "hahah4");
+        myMap.add("test5", "hahah5");
+        myMap.add("test6", "hahah6");
+        myMap.add("test7", "hahah7");
+
+        System.out.println(myMap.get("test2"));
+        System.out.println(myMap.get("test1"));
+        myMap.remove("test1");
+        System.out.println(myMap.get("test1"));
+
     }
 }
 
