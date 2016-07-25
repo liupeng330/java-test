@@ -112,7 +112,7 @@ public class MyHashMap<K, V> {
         myMap.add("test1", "hahah1");
         myMap.add("test2", "hahah2");
         myMap.add("test3", "hahah3");
-        myMap.add("test4", "hahah4");
+        myMap.add("StackUse1", "hahah4");
         myMap.add("test5", "hahah5");
         myMap.add("test6", "hahah6");
         myMap.add("test7", "hahah7");

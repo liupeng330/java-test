@@ -215,5 +215,6 @@ public class MyLinkedList<T> implements Iterable<T> {
     {
         System.out.println(arr);
         System.out.println(arr.length);
+        LinkedList<String> aaa = new LinkedList<>();
     }
 }
