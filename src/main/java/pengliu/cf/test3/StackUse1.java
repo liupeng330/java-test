@@ -82,6 +82,7 @@ public class StackUse1
         System.out.println(test.check("([{234esf}])"));
         System.out.println(test.check("([{234esf]])"));
         System.out.println(test.check("([abcd])]}]"));
+        System.out.println(test.check("([abcd])}]"));
         System.out.println(test.check("([{[abcd]"));
     }
 }
