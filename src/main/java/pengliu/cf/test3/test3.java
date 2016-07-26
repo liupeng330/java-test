@@ -1,5 +1,9 @@
 package pengliu.cf.test3;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by peng on 16-7-23.
  */
@@ -7,7 +11,6 @@ public class test3
 {
     public static void main(String[] args)
     {
-        System.out.println(cal(10));
     }
 
     private static int cal(int x)

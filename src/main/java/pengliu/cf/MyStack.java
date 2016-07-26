@@ -41,4 +41,9 @@ public class MyStack<T>
             System.out.println(stack.pop());
         }
     }
+
+    public Integer size()
+    {
+        return this.innerList.size();
+    }
 }
