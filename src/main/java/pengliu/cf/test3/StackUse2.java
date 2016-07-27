@@ -8,6 +8,7 @@ import pengliu.cf.MyStack;
 /**
  * Created by peng on 7/26/16.
  */
+// 后缀式计算结果
 public class StackUse2
 {
     private static final String[] operand = {"*", "+", "-", "/"};

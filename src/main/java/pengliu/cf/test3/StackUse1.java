@@ -5,6 +5,7 @@ import pengliu.cf.MyStack;
 /**
  * Created by peng on 7/25/16.
  */
+// 判断符号是否封闭
 public class StackUse1
 {
     private MyStack<Character> stack = new MyStack<>();
