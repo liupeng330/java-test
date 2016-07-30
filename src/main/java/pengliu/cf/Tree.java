@@ -1,6 +1,7 @@
 package pengliu.cf;
 
 import java.util.Comparator;
+import java.util.Queue;
 
 /**
  * Created by peng on 7/29/16.
@@ -108,6 +109,30 @@ public class Tree<T extends Comparable<T>> // 使得树中的节点支持比较�
 
         // 无论插入的value大于, 小于或者等于root的value时, 都要返回root的引用给上层递归
         return root;
+    }
+
+    // 层序遍历二叉树
+    public void printByLevel()
+    {
+        MyQueue<TreeNode<T>> queue = new MyQueue<>();
+        if(this.root == null)
+        {
+            return;
+        }
+        queue.enQueue(this.root);
+        while(!queue.isEmpty())
+        {
+            TreeNode<T> firstNode = queue.deQueue();
+            System.out.println(firstNode.value);
+            if(firstNode.left != null)
+            {
+                queue.enQueue(firstNode.left);
+            }
+            if(firstNode.right != null)
+            {
+                queue.enQueue(firstNode.right);
+            }
+        }
     }
 
     public static void main(String[] args)
