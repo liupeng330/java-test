@@ -7,7 +7,7 @@ import java.util.Arrays;
  */
 public class QuickSelect
 {
-    // 表示找数组arr中第k个小的值
+    // 表示找数组arr中第k个最小的值
     public static Integer quickSelect(int[] arr, int k)
     {
         if(arr == null) return null;
@@ -29,7 +29,8 @@ public class QuickSelect
     }
 
     // T(N) = T(N/2) + N
-    // T(N) = O(NlogN)
+    // T(N) = O(N)
+    // 即可以使用线性时间来获得第k个最小值
     public static Integer Qselect(int[] arr, int k, int left, int right)
     {
         int len = right - left + 1;
