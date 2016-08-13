@@ -107,5 +107,9 @@ public class LIS
         int[] testArray2 = new int[]{-1, 2, 0, 1, 2, 7};
         System.out.println(String.format("LIS is %d", LisWithTwoCircles(testArray2)));
         System.out.println(String.format("LIS is %d", LisWithBinSearch(testArray2)));
+
+        int[] testArray3 = new int[]{-1, -2};
+        System.out.println(String.format("LIS is %d", LisWithTwoCircles(testArray3)));
+        System.out.println(String.format("LIS is %d", LisWithBinSearch(testArray3)));
     }
 }
