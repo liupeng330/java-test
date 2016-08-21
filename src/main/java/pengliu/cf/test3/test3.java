@@ -20,7 +20,26 @@ public class test3
 //            System.out.println(entry.getKey() + ", " + entry.getValue());
 //        }
 
-        listSettledBillStat("2015-01", "2016-12");
+//        listSettledBillStat("2015-01", "2016-12");
+        List<Integer[]> test = new ArrayList<>();
+        test.add(new Integer[]{1, 2, 3});
+        test.add(new Integer[]{4, 5, 6});
+
+        for(Integer[] arr: test)
+        {
+            for(int i=0; i<arr.length; i++)
+            {
+                System.out.print(arr[i] + ",");
+            }
+            System.out.println();
+        }
+
+        List<String> chars = new ArrayList<>();
+        chars.add("abc");
+        chars.add("dev");
+        chars.add("sdfasdf");
+
+        String[] arrString = chars.toArray(new String[0]);
     }
 
     private static int cal(int x)
