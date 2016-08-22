@@ -31,6 +31,7 @@ public class RevertSentence
                 startIndex = i+1;
             }
         }
+        swapWord(arr, startIndex, arr.length - 1);
 
         return new String(arr);
     }
@@ -53,5 +54,6 @@ public class RevertSentence
     public static void main(String[] args)
     {
         System.out.println(revert("I love java"));
+        System.out.println(revert("LiuPeng love java"));
     }
 }
