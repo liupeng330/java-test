@@ -113,7 +113,8 @@ public class QuickSort
 //        int[] arrBeforeSort = {3, 5, 1, 2, 4};
 //        int[] arrBeforeSort = {3, 5, 1};
 //        int[] arrBeforeSort = {5, 1};
-        int[] arrBeforeSort = {3, 5, 1, 5, 4};
+//        int[] arrBeforeSort = {3, 5, 1, 5, 4};
+        int[] arrBeforeSort = {-1, 0, 1, 2, 4, 5};
 //        int[] arrBeforeSort = {5, 5, 5, 5, 5};
         System.out.println(String.format("Before sort: %s", Arrays.toString(arrBeforeSort)));
         sort(arrBeforeSort);
