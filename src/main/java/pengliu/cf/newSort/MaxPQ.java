@@ -37,7 +37,9 @@ public class MaxPQ<Key extends Comparable<Key>> {
 
     //上浮
     private void swim(int k) {
-        while(k > 1 && arr[k/2].compareTo(arr[k]) < 0) {
+        //使用k/2 >= 1 与 k > 1 的效果是相同的
+        while(k/2 >= 1 && arr[k/2].compareTo(arr[k]) < 0) {
+//        while(k > 1 && arr[k/2].compareTo(arr[k]) < 0) {
             swap(k/2, k);
             k = k/2;
         }
@@ -48,9 +50,9 @@ public class MaxPQ<Key extends Comparable<Key>> {
         while(2*k <= N) {
             int j = 2*k;
 
-            // 判断j小于N， 而不是j小于等于N， 是为了保证j+1不数组越界
+            // 判断j+1小于等于N是为了保证j+1数组不越界
             // 下面的操作是为了当k的子节点有左右两个节点时，保证j是指向更大的那个节点
-            if(j < N && arr[j].compareTo(arr[j+1]) < 0) {
+            if(j + 1 <= N && arr[j].compareTo(arr[j+1]) < 0) {
                 j++;
             }
             //当arr[k] < arr[j]时，交换k，j的值，并将k下移到该节点
