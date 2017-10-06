@@ -1,171 +1,96 @@
 package pengliu.cf;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
- * Created by peng on 7/18/16.
+ * Created by peng on 10/6/17.
  */
 public class MyLinkedList<T> implements Iterable<T> {
-
-    // 为了linkedlist支持for each,需要时间iterator接口
-    @Override
-    public Iterator<T> iterator()
-    {
-        return new LinkedListIterator<T>();
+    private class Node {
+        T value;
+        Node next;
     }
 
-    // 使用私有内部类,隐藏迭代器的实现
-    private class LinkedListIterator<E> implements Iterator<E>
-    {
-        @Override
-        public boolean hasNext()
-        {
-            return current != null;
-        }
-
-        @Override
-        public E next()
-        {
-            Node returned = current;
-            current = current.next;
-            return (E)returned.getValue();
-        }
-    }
-
-
-    private static class Node<U> {
-        private Node<U> next;
-        private U value;
-
-        public Node(Node<U> next, U value) {
-            this.setNext(next);
-            this.setValue(value);
-        }
-
-        public Node<U> getNext() {
-            return next;
-        }
-
-        public void setNext(Node<U> next) {
-            this.next = next;
-        }
-
-        public U getValue() {
-            return value;
-        }
-
-        public void setValue(U value) {
-            this.value = value;
-        }
-    }
-
-    private Node<T> head;
-    private Node<T> tail;
-    private Node<T> current;
+    private int N = 0;
+    private Node head = null;
+    private Node tail = null;
 
     public boolean isEmpty() {
-        return this.head == null && this.tail == null;
+        return N == 0;
     }
 
-    public void reset()
-    {
-        this.current = this.head;
+    public int size() {
+        return N;
     }
 
-    public int size()
-    {
-        if(this.isEmpty())
-        {
-            return 0;
+    public void insert(T value) {
+        Node newNode = new Node();
+        newNode.value = value;
+        newNode.next = null;
+
+        if(isEmpty()) {
+            head = newNode;
+            tail = newNode;
         }
-        int size = 0;
-        for(Node<T> cur = this.head; cur != null; cur = cur.next)
-        {
-            size++;
+        else {
+            tail.next = newNode;
+            tail = newNode;
         }
-        return size;
+        N++;
     }
 
-    public void add(T value)
-    {
-        Node newNode = new Node(null, value);
-
-        if(isEmpty())
-        {
-            this.head = newNode;
-            this.tail = newNode;
-            this.current = this.head;
-        }
-        else
-        {
-            this.tail.next = newNode;
-            this.tail = newNode;
-        }
-    }
-
-    public Node<T> findPre(T value)
-    {
-        if(this.isEmpty())
-        {
-            return null;
-        }
-        if(this.head.value.equals(value))
-        {
-            return null;
-        }
-        for(Node<T> pre = this.head, cur = this.head.next; cur != null; pre = cur, cur = cur.next)
-        {
-            if(cur.value.equals(value))
-            {
+    private Node findPre(T value) {
+        Node pre = head;
+        Node current = head.next;
+        while(current != null) {
+            if(current.value.equals(value)) {
                 return pre;
             }
+            pre = current;
+            current = current.next;
         }
         return null;
     }
 
-    public void remove(T value)
-    {
-        if(this.isEmpty())
-        {
-            return;
-        }
-        if(this.head.value.equals(value))
-        {
-            if(this.head == this.tail)
-            {
-                this.head = null;
-                this.tail = null;
-            }
-            else
-            {
-                this.head = this.head.next;
+    public void delete(T value) {
+        if(head.value.equals(value)) {
+            head = head.next;
+            if(N == 1) {
+                tail = null;
             }
         }
-        else
-        {
-            Node<T> pre = this.findPre(value);
-            Node<T> cur = pre.next;
-            pre.next = cur.next;
-            if(cur == this.tail)
-            {
-                this.tail = pre;
+        else {
+            Node pre = findPre(value);
+            if(pre == null) return;
+            if(pre.next == tail) {
+                tail = pre;
             }
+            pre.next = pre.next.next;
+        }
+        N--;
+    }
+
+    // 使用私有内部类,隐藏迭代器的实现
+    private class LinkedListIterator implements Iterator<T> {
+        // 迭代器从链表表头开始遍历
+        // 每次使用for each，都会重新初始化一次，都会从表头开始重新遍历
+        private Node current = head;
+
+        @Override
+        public boolean hasNext() {
+            return current != null;
+        }
+
+        @Override
+        public T next() {
+            T temp = current.value;
+            current = current.next;
+            return temp;
         }
     }
 
-    public void printAll()
-    {
-        if(this.isEmpty())
-        {
-            return;
-        }
-        for(Node<T> cur = this.head; cur != null; cur = cur.next)
-        {
-            System.out.println(cur.getValue());
-        }
+    public Iterator<T> iterator() {
+        return new LinkedListIterator();
     }
 
     public static void main(String[] args)
@@ -173,48 +98,37 @@ public class MyLinkedList<T> implements Iterable<T> {
         MyLinkedList<Integer> linkedList = new MyLinkedList<>();
         System.out.println(linkedList.size());
         System.out.println(linkedList.isEmpty());
-        linkedList.add(1);
-        linkedList.add(2);
-        linkedList.add(3);
-        linkedList.add(4);
-        linkedList.add(5);
+        linkedList.insert(1);
+        linkedList.insert(2);
+        linkedList.insert(3);
+        linkedList.insert(4);
+        linkedList.insert(5);
+        linkedList.printAll();
 
-        System.out.println("Start to for each");
-        for(Integer i: linkedList)
-        {
-            System.out.println(i);
-        }
-        linkedList.reset();
-        System.out.println("Start to for each");
-        for(Integer i: linkedList)
-        {
-            System.out.println(i);
-        }
+        linkedList.delete(1);
+        linkedList.printAll();
 
-        List<Integer> test = new ArrayList<>();
-        test.add(1);
-        test.add(2);
-        test.add(3);
-        test.add(4);
+        linkedList.delete(5);
+        linkedList.printAll();
 
+        linkedList.delete(123);
+        linkedList.printAll();
 
-        System.out.println(test.get(2));
-        int[] a = new int[5];
-        for(int i = 0; i < a.length; i++)
-        {
-            System.out.println(a[i]);
-        }
+        linkedList.delete(2);
+        linkedList.delete(3);
+        linkedList.delete(4);
+        linkedList.printAll();
 
-        int[] b = {2, 1, 4};
-        System.out.println(b);
-        testArray(b);
-
+        linkedList.insert(123);
+        linkedList.insert(456);
+        linkedList.printAll();
     }
 
-    private static void testArray(int[] arr)
-    {
-        System.out.println(arr);
-        System.out.println(arr.length);
-        LinkedList<String> aaa = new LinkedList<>();
+    private void printAll() {
+        System.out.println("Start to for each");
+        for(T i: this)
+        {
+            System.out.println(i);
+        }
     }
 }
