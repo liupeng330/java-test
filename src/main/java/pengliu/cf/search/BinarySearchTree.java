@@ -1,5 +1,7 @@
 package pengliu.cf.search;
 
+import pengliu.cf.MyQueue;
+
 /**
  * Created by peng on 11/5/17.
  */
@@ -246,6 +248,26 @@ public class BinarySearchTree <Key extends Comparable<Key>, Value> {
         print(node.left);
         System.out.println(node.key + "--" + node.value);
         print(node.right);
+    }
+
+    //查找范围在[lo, hi]内的节点key的集合
+    public MyQueue<Key> keys(Key lo, Key hi) {
+        MyQueue<Key> queue = new MyQueue<Key>();
+        keys(root, queue, lo, hi);
+        return queue;
+    }
+
+    // 当前节点的值，决定了是否递归遍历其左子树和其右子树
+    //    * 当当前节点已经小于等于最小范围lo时，那它的左子树肯定也都小于lo，那么它们就都不在范围[lo, hi]内了
+    //    * 当当前节点已经大于等于最大范围hi时，那它的右子树肯定也都大于hi，那么它们就都不在范围[lo, hi]内了
+    private void keys(Node node, MyQueue<Key> queue, Key lo, Key hi) {
+        if(node == null) return;
+        int cmpLo = lo.compareTo(node.key);
+        int cmpHi = hi.compareTo(node.key);
+
+        if(cmpLo < 0) { keys(node.left, queue, lo, hi); }
+        if(cmpLo <= 0 && cmpHi >= 0) { queue.enQueue(node.key); }
+        if(cmpHi > 0) { keys(node.right, queue, lo, hi); }
     }
 
     public static void main(String[] args) {
